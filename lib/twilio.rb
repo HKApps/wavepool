@@ -1,8 +1,8 @@
 class TwilioClient
   attr_reader :number, :account
 
-  def initialize(acct_sid, auth_token, number)
-    @account = Twilio::REST::Client.new(acct_sid, auth_token).account
+  def initialize(number)
+    @account = Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_AUTH_TOKEN']).account
     @number  = number
   end
 

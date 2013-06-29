@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'faraday'
+gem 'figaro'
 gem 'jbuilder', '~> 1.2'
 gem 'pg'
-gem 'rails', '4.0.0.rc2'
+gem 'rails', '4.0.0'
 gem 'rest-client'
 gem 'turbolinks'
 gem 'twilio-ruby'
