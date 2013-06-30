@@ -1,6 +1,6 @@
 class Echonest
-  def initialize(api_key)
-    @api_url = Echonest::ApiUrl.new(api_key)
+  def initialize
+    @api_url = Echonest::ApiUrl.new
   end
 
   def search(artist, title)
@@ -14,10 +14,6 @@ class Echonest
   private
 
   class ApiUrl
-    def initialize(api_key)
-      @api_key = api_key
-    end
-
     def final(artist, title)
       URI.escape construct_url(artist, title)
     end
@@ -31,7 +27,7 @@ class Echonest
     end
 
     def base_url
-      "http://developer.echonest.com/api/v4/song/search?api_key=#{@api_key}"
+      "http://developer.echonest.com/api/v4/song/search?api_key=#{ENV["ECHONEST_API_KEY"]}"
     end
   end
 end
