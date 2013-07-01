@@ -1,3 +1,26 @@
+= javascript_include_tag "rdioscripts.js"
 %h1= @playlist.name
+#rdio
 
-%p widgetz
+#songInfo
+  %img#art{ :src=>"", :height=>"100", :style=>"float:left;margin-right:20px;" }
+
+  %b Track:
+  #track
+  %b Artist:
+  #artist
+  %b Position:
+  %span{ :style => "display:inline-block;width:200px;border:1px solid black;" }
+    %span#position{ :style => "display:inline-block;background-color:#000" }
+
+#playbackControls
+  %button#previous &lt;&lt;
+  %button#play &gt;
+  %button#pause ||
+  %button#next &gt;&gt;
+
+
+
+
+
+
