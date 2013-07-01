@@ -16,6 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development do
   gem 'pry-rails'
+  gem 'pry-nav'
 end
 
 group :doc do
