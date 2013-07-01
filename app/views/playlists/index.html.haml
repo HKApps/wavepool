@@ -1,4 +1,4 @@
 %h1 My playlists
 
 - @playlists.each do |playlist|
-  = playlist["name"]
+  = link_to playlist["name"], "/playlists/#{playlist["key"]}"

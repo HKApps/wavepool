@@ -6,7 +6,8 @@ Whirlwind::Application.routes.draw do
   match '/auth/rdio/callback', to: 'sessions#create', via: [:get, :post]
   match '/logout', to: 'sessions#destroy', via: [:get, :post]
 
-  resources :playlists
+  get '/playlists/:rdio_key' => 'playlists#show'
+  get '/playlists' => 'playlists#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
