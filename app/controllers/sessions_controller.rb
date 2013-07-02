@@ -1,7 +1,7 @@
 require 'rdio'
 
 class SessionsController < ApplicationController
-  
+
   def new
     rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]])
     @url = rdio.begin_authentication("#{root_url}auth/rdio/callback")

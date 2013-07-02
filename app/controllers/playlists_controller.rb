@@ -9,4 +9,25 @@ class PlaylistsController < ApplicationController
   def show
     @playlist = Playlist.find_by rdio_key: params[:rdio_key]
   end
+
+  def add_song
+    # handle adding songs from the params
+    # Perhaps consider using different controller to route suggestions
+  end
+
+  def generate_access_code
+    playlist = Playlist.find_by rdio_key: params[:rdio_key]
+    playlist.access_code = generate_code
+    if playlist.save
+      redirect_to :back, notice: "Successfully created access code"
+    else
+      redirect_to :back, notice: "FAIL"
+    end
+  end
+
+  private
+
+  def generate_code
+    SecureRandom.hex(3)
+  end
 end

@@ -11,13 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130701001131) do
+ActiveRecord::Schema.define(version: 20130702041845) do
 
   create_table "playlists", force: true do |t|
-    t.string "name",     null: false
-    t.string "rdio_key", null: false
+    t.string "name",        null: false
+    t.string "rdio_key",    null: false
+    t.string "access_code"
   end
 
   add_index "playlists", ["rdio_key"], name: "index_playlists_on_rdio_key", unique: true, using: :btree
+
+  create_table "users", force: true do |t|
+    t.string  "phone_number"
+    t.integer "playlist_id"
+  end
 
 end
