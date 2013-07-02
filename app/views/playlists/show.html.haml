@@ -1,5 +1,8 @@
 = javascript_include_tag "rdioscripts.js"
+
 %h1= @playlist.name
+#playlist_key= @playlist.rdio_key
+%p Add a few songs to build up your playlist and then press play when you're ready to get started
 #rdio
 
 #songInfo
@@ -11,13 +14,13 @@
   #artist
   %b Position:
   %span{ :style => "display:inline-block;width:200px;border:1px solid black;" }
-    %span#position{ :style => "display:inline-block;background-color:#000" }
+    %span#position{ :style => "display:inline-block;background-color:#666" }
 
 #playbackControls
-  %button#previous &lt;&lt;
-  %button#play &gt;
-  %button#pause ||
-  %button#next &gt;&gt;
+  -# %button#previous previous
+  %button#play play
+  %button#pause pause
+  -# %button#next next
 
 
 
