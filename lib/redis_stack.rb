@@ -12,6 +12,6 @@ class RedisStack
   end
 
   def pop
-    $redis.lpop @cache_key
+    JSON.parse $redis.lpop(@cache_key), symbolize_names: true
   end
 end
