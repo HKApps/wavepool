@@ -1,10 +1,14 @@
 class Echonest
   def self.search(artist, title)
-    new.api_request(ApiUrl.new.final(artist, title))
+    new(artist, title).api_request
   end
 
-  def api_request(url)
-    ResponseParser.new RestClient.get(url)
+  def initialize(artist, title)
+    @url = ApiUrl.new.final(artist, title)
+  end
+
+  def api_request
+    ResponseParser.new RestClient.get(@url)
   end
 
   private
@@ -35,6 +39,14 @@ class Echonest
       @status = parsed[:response][:status]
       @songs  = parsed[:response][:songs].map { |s| SongParser.new(s) }
     end
+
+    def to_sms_choices
+      final_text = ''
+      songs.each_with_index do |song, i|
+        final_text << "\n#{i+1}. #{song.title} - #{song.artist_name}"
+      end
+      final_text
+    end
   end
 
   class SongParser
@@ -44,6 +56,9 @@ class Echonest
 
     def initialize(*args)
       super
+    end
+
+    def to_sms
     end
   end
 end
