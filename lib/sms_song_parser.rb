@@ -1,4 +1,4 @@
-class SongParser
+class SmsSongParser
   attr_reader :title, :artist
 
   def initialize(message)

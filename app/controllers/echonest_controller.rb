@@ -1,5 +1,5 @@
 require 'echonest'
-require 'song_parser'
+require 'sms_song_parser'
 require 'twilio_sms_receiver'
 require 'redis_stack'
 
@@ -16,8 +16,8 @@ class EchonestController < ApplicationController
 
   private
 
-  def song_parser
-    @song_parser ||= SongParser.new(sms_receiver.body)
+  def sms_song_parser
+    @sms_song_parser ||= SmsSongParser.new(sms_receiver.body)
   end
 
   def sms_receiver
@@ -29,6 +29,6 @@ class EchonestController < ApplicationController
   end
 
   def echonest
-    @echonest ||= Echonest.search(song_parser.artist, song_parser.title)
+    @echonest ||= Echonest.search(sms_song_parser.artist, sms_song_parser.title)
   end
 end

@@ -31,8 +31,8 @@ class PlaylistsController < ApplicationController
     SecureRandom.hex(2)
   end
 
-  def song_parser
-    @song_parser ||= SongParser.new(sms_receiver.body)
+  def sms_song_parser
+    @sms_song_parser ||= SmsSongParser.new(sms_receiver.body)
   end
 
   def sms_receiver
