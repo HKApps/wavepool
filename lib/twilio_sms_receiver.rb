@@ -26,7 +26,7 @@ class TwilioSmsReceiver
   end
 
   def playlist
-    @playlist ||= (user.playlist || Playlist.find_by(access_code: body))
+    @playlist ||= (user.try(:playlist) || Playlist.find_by(access_code: body))
   end
 
   def user
