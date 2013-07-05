@@ -1,6 +1,7 @@
 require 'rdio'
 
 class SessionsController < ApplicationController
+  before_filter :authenticate, only: [:destroy]
 
   def new
     rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]])
@@ -32,6 +33,7 @@ class SessionsController < ApplicationController
 
   def destroy
     current_user.clear_tokens!
+    session[:user_id] = nil
     redirect_to :root
   end
 end

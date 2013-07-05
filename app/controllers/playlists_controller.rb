@@ -1,6 +1,7 @@
 require 'rdio'
 
 class PlaylistsController < ApplicationController
+  before_filter :authenticate, only: [:index, :show, :generate_access_code]
   skip_before_filter :verify_authenticity_token, only: [:add_song]
 
   def index

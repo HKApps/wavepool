@@ -26,8 +26,12 @@ class ApplicationController < ActionController::Base
     @echonest ||= Echonest.search(sms_song_parser.artist, sms_song_parser.title)
   end
 
+  def authenticate
+    redirect_to login_path unless current_user
+  end
+
   def current_user
-    @current_user ||= User.find_by id: session[:user_id]
+    @current_user ||= User.find_by id: session[:user_id] if session[:user_id]
   end
 
   def user
