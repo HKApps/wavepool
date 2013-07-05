@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130705185713) do
+ActiveRecord::Schema.define(version: 20130705191609) do
 
   create_table "playlists", force: true do |t|
     t.string  "name",        null: false
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20130705185713) do
     t.integer "playlist_id"
     t.string  "access_token"
     t.string  "access_token_secret"
+    t.string  "rdio_key"
   end
 
 end
