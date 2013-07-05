@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
     @echonest ||= Echonest.search(sms_song_parser.artist, sms_song_parser.title)
   end
 
+  def current_user
+    @current_user ||= User.find_by id: session[:user_id]
+  end
+
   def user
     @user ||= User.find_or_create_by_sms(sms_receiver)
   end

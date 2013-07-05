@@ -5,9 +5,9 @@ class PlaylistsController < ApplicationController
 
   def index
     rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
-                    [session[:access_token], session[:access_token_secret]])
+                    [current_user.access_token, current_user.access_token_secret])
     @playlists = rdio.call('getPlaylists')["result"]["owned"]
-    Playlist.from_rdio(@playlists)
+    Playlist.from_rdio(@playlists, current_user.id)
   end
 
   def show
