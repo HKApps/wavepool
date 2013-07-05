@@ -35,6 +35,7 @@ class Echonest
     attr_reader :response, :status, :songs
 
     def initialize(raw)
+      return unless raw
       @response = raw
       @status   = raw[:response][:status]
       @songs    = raw[:response][:songs].map { |s| SongParser.new(s) }

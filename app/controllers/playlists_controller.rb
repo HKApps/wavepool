@@ -15,14 +15,21 @@ class PlaylistsController < ApplicationController
   end
 
   def add_song
-    result         = Echonest::ResponseParser.new redis_stack.pop
-    foreign_id     = result.songs[sms_receiver.body.to_i].tracks.first[:foreign_id]
-    rdio_id        = foreign_id.split(':').last
-    playlist_owner = sms_receiver.playlist.user
-    rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
-                    [playlist_owner.access_token, playlist_owner.access_token_secret])
-    rdio.call("addToPlaylist", playlist: sms_receiver.playlist.rdio_key, tracks: rdio_id)
-    render head :ok
+    result = Echonest::ResponseParser.new redis_stack.pop
+    if result.songs.present?
+      foreign_id     = result.songs[sms_receiver.body.to_i].tracks.first[:foreign_id]
+      rdio_id        = foreign_id.split(':').last
+      playlist_owner = sms_receiver.playlist.user
+      rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
+                      [playlist_owner.access_token, playlist_owner.access_token_secret])
+      rdio.call("addToPlaylist", playlist: sms_receiver.playlist.rdio_key, tracks: rdio_id)
+      head :ok
+    else
+      twiml_response = Twilio::TwiML::Response.new do |r|
+        r.Sms "Sorry! We couldn't process your request :("
+      end
+      render xml: twiml_response.text
+    end
   end
 
   def generate_access_code
