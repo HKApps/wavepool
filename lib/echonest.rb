@@ -8,7 +8,7 @@ class Echonest
   end
 
   def api_request
-    ResponseParser.new RestClient.get(@url)
+    ResponseParser.new JSON.parse(RestClient.get(@url), symbolize_names: true)
   end
 
   private
@@ -32,12 +32,12 @@ class Echonest
   end
 
   class ResponseParser
-    attr_reader :status, :songs
+    attr_reader :response, :status, :songs
 
     def initialize(raw)
-      parsed  = JSON.parse(raw, symbolize_names: true)
-      @status = parsed[:response][:status]
-      @songs  = parsed[:response][:songs].map { |s| SongParser.new(s) }
+      @response = raw
+      @status   = raw[:response][:status]
+      @songs    = raw[:response][:songs].map { |s| SongParser.new(s) }
     end
 
     def to_sms_choices
@@ -56,9 +56,6 @@ class Echonest
 
     def initialize(*args)
       super
-    end
-
-    def to_sms
     end
   end
 end
