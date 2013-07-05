@@ -3,12 +3,12 @@ class RedisStack
     @cache_key = cache_key
   end
 
-  def get
-    $redis.get @cache_key
+  def last
+    JSON.parse $redis.lindex(@cache_key, $redis.llen(@cache_key)-1), symbolize_names: true
   end
 
   def push(value)
-    $redis.lpush @cache_key, value
+    $redis.lpush @cache_key, value.to_json
   end
 
   def pop
