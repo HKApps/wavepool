@@ -5,6 +5,9 @@ class ConnectController < ApplicationController
     if user && sms_receiver.song_request?
       params.merge!(rdio_key: sms_receiver.playlist.rdio_key)
       redirect_to echonest_search_path(params)
+    elsif sms_receiver.song_decision?
+      params.merge!(rdio_key: sms_receiver.playlist.rdio_key)
+      redirect_to add_song_to_playlist_path(params)
     elsif sms_receiver.legit_access_code_present?
       twiml_response = Twilio::TwiML::Response.new do |r|
         r.Sms "Thanks! What song would like to request?\n\nFormat your request like '[title] - [artist]'.\n\nFor example: Get Lucky - Daft Punk."

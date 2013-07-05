@@ -1,4 +1,8 @@
+require 'rdio'
+
 class PlaylistsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:add_song]
+
   def index
     rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
                     [session[:access_token], session[:access_token_secret]])
@@ -11,8 +15,12 @@ class PlaylistsController < ApplicationController
   end
 
   def add_song
-    # handle adding songs from the params
-    # Perhaps consider using different controller to route suggestions
+    result     = Echonest::ResponseParser.new redis_stack.pop
+    foreign_id = result.songs[sms_receiver.body.to_i].tracks.first[:foreign_id]
+    rdio_id = foreign_id.split(':').last
+    rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
+                    [session[:access_token], session[:access_token_secret]])
+    rdio.call("addToPlaylist", playlist: sms_receiver.playlist.rdio_key, tracks: rdio_id)
   end
 
   def generate_access_code
