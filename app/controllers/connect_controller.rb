@@ -1,5 +1,3 @@
-require 'twilio_sms_receiver'
-
 class ConnectController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
@@ -18,15 +16,5 @@ class ConnectController < ApplicationController
       end
       render xml: twiml_response.text
     end
-  end
-
-  private
-
-  def sms_receiver
-    @sms_receiver ||= TwilioSmsReceiver.from_params(params.clone)
-  end
-
-  def user
-    @user ||= User.find_or_create_by_sms(sms_receiver)
   end
 end

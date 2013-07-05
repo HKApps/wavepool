@@ -30,12 +30,4 @@ class PlaylistsController < ApplicationController
   def generate_code
     SecureRandom.hex(2)
   end
-
-  def sms_song_parser
-    @sms_song_parser ||= SmsSongParser.new(sms_receiver.body)
-  end
-
-  def sms_receiver
-    @sms_receiver ||= TwilioSmsReceiver.from_params(params.clone)
-  end
 end
