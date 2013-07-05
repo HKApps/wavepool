@@ -4,7 +4,9 @@ class RedisStack
   end
 
   def last
-    JSON.parse $redis.lindex(@cache_key, $redis.llen(@cache_key)-1), symbolize_names: true
+    result = $redis.lindex(@cache_key, 0)
+    return unless result
+    JSON.parse result, symbolize_names: true
   end
 
   def push(value)
