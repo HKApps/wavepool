@@ -26,14 +26,14 @@ class TwilioSmsReceiver
   end
 
   def playlist
-    @playlist ||= (user.try(:playlist) || Playlist.find_by(access_code: body))
+    @playlist ||= (requester.try(:playlist) || Playlist.find_by(access_code: body))
   end
 
-  def user
-    @user ||= User.find_by phone_number: from
+  def requester
+    @requester ||= User.find_by phone_number: from
   end
 
   def cache_key
-    "#{user.phone_number}:#{playlist.rdio_key}"
+    "#{requester.phone_number}:#{playlist.rdio_key}"
   end
 end

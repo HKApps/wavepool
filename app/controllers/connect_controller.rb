@@ -2,7 +2,7 @@ class ConnectController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def connect
-    if sms_receiver.legit_access_code_present? && user
+    if sms_receiver.legit_access_code_present? && requester.present?
       twiml_response = Twilio::TwiML::Response.new do |r|
         r.Sms "Thanks! What song would like to request?\n\nFormat your request like '[title] - [artist]'.\n\nFor example: Get Lucky - Daft Punk."
       end

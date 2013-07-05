@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by id: session[:user_id] if session[:user_id]
   end
 
-  def user
-    @user ||= User.find_or_create_by_sms(sms_receiver)
+  def requester
+    @requester ||= User.find_or_create_by_sms(sms_receiver)
   end
 end
