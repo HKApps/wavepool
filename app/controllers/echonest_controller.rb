@@ -7,9 +7,7 @@ class EchonestController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def search
-    results = Echonest.search(song_parser.artist, song_parser.title)
-    songs   = results[:response][:songs]
-    redis_stack.push songs
+    redis_stack.push results[:response][:songs]
     twiml_response = Twilio::TwiML::Response.new do |r|
       r.Sms "Choose which song you would like to add to the queue:"
     end
@@ -30,4 +28,7 @@ class EchonestController < ApplicationController
     @redis_stack ||= RedisStack.new(sms_receiver.cache_key)
   end
 
+  def echonest
+    @echonest ||= Echonest.search(song_parser.artist, song_parser.title)
+  end
 end

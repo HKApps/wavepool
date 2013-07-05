@@ -4,7 +4,7 @@ class Echonest
   end
 
   def api_request(url)
-    JSON.parse(RestClient.get(url), symbolize_names: true)
+    ResponseParser.new RestClient.get(url)
   end
 
   private
@@ -24,6 +24,26 @@ class Echonest
 
     def base_url
       "http://developer.echonest.com/api/v4/song/search?api_key=#{ENV["ECHONEST_API_KEY"]}"
+    end
+  end
+
+  class ResponseParser
+    attr_reader :status, :songs
+
+    def initialize(raw)
+      parsed  = JSON.parse(raw, symbolize_names: true)
+      @status = parsed[:response][:status]
+      @songs  = parsed[:response][:songs].map { |s| SongParser.new(s) }
+    end
+  end
+
+  class SongParser
+    include ActiveModel::Model
+
+    attr_accessor :title, :artist_name, :id, :tracks, :artist_id, :audio_md5
+
+    def initialize(*args)
+      super
     end
   end
 end
