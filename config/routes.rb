@@ -13,6 +13,8 @@ Whirlwind::Application.routes.draw do
 
   post '/connect' => 'connect#connect'
 
+  post '/song_search' => 'echonest#search', as: "echonest_search"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

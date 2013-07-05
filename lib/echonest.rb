@@ -1,10 +1,6 @@
 class Echonest
-  def initialize
-    @api_url = Echonest::ApiUrl.new
-  end
-
-  def search(artist, title)
-    api_request(@api_url.final(artist, title))
+  def self.search(artist, title)
+    new.api_request(ApiUrl.new.final(artist, title))
   end
 
   def api_request(url)

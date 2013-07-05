@@ -3,10 +3,14 @@ class User < ActiveRecord::Base
     user = self.where(
       phone_number: sms_receiver.from,
     ).first_or_initialize do |u|
-      u.playlist_id = sms_receiver.body
+      u.playlist_id = Playlist.find_by(access_code: sms_receiver.body).id
     end
 
     user.save if user.changed?
     user
+  end
+
+  def playlist
+    Playlist.find_by id: playlist_id
   end
 end
