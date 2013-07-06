@@ -1,4 +1,5 @@
-%h1 My playlists
+%h2.center My playlists
 
-- @playlists.each do |playlist|
-  = link_to playlist["name"], "/playlists/#{playlist["key"]}"
+%ul.nav.nav-tabs.nav-stacked.playlist-list
+  - @playlists.each do |playlist|
+    %li= link_to playlist["name"], "/playlists/#{playlist["key"]}"
