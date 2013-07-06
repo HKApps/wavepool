@@ -16,10 +16,9 @@ class PlaylistsController < ApplicationController
   end
 
   def add_song
-    result = Echonest::ResponseParser.new redis_stack.last
+    result = RdioSongs::ResponseParser.new redis_stack.last
     if result.songs.present?
-      foreign_id     = result.songs[sms_receiver.body.to_i - 1].tracks.first[:foreign_id]
-      rdio_id        = foreign_id.split(':').last
+      rdio_id        = result.songs[sms_receiver.body.to_i - 1].key
       playlist_owner = sms_receiver.playlist.user
       rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
                       [playlist_owner.access_token, playlist_owner.access_token_secret])

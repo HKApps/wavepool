@@ -13,7 +13,7 @@ Whirlwind::Application.routes.draw do
 
   post '/connect' => 'connect#connect'
 
-  post '/song_search' => 'echonest#search', as: "echonest_search"
+  match '/song_search' => 'song_search#search', as: "song_search", via: [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

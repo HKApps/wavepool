@@ -9,7 +9,7 @@ class ConnectController < ApplicationController
       render xml: twiml_response.text
     elsif sms_receiver.song_request?
       params.merge!(rdio_key: sms_receiver.playlist.rdio_key)
-      redirect_to echonest_search_path(params)
+      redirect_to song_search_path(params)
     elsif sms_receiver.song_decision?
       params.merge!(rdio_key: sms_receiver.playlist.rdio_key)
       redirect_to add_song_to_playlist_path(params)

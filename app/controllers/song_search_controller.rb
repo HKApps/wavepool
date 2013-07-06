@@ -1,9 +1,10 @@
-class EchonestController < ApplicationController
+class SongSearchController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def search
-    redis_stack.push echonest.response
-    message = (echonest.songs.present? ? base_response << echonest.to_sms_choices : no_result_response)
+    results = rdio_songs.search(sms_song_parser.artist, sms_song_parser.title)
+    redis_stack.push results.response
+    message = (results.songs.present? ? results.to_sms_choices : no_result_response)
     twiml_response = Twilio::TwiML::Response.new do |r|
       r.Sms message
     end
@@ -11,10 +12,6 @@ class EchonestController < ApplicationController
   end
 
   private
-
-  def base_response
-    "Choose which song you would like to add to the queue:"
-  end
 
   def no_result_response
     "Sorry, we can’t find that one! Check your spelling and try again!"

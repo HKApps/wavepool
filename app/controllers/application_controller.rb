@@ -1,4 +1,4 @@
-require 'echonest'
+require 'rdio_songs'
 require 'redis_stack'
 require 'sms_song_parser'
 require 'twilio_sms_receiver'
@@ -22,8 +22,8 @@ class ApplicationController < ActionController::Base
     @redis_stack ||= RedisStack.new(sms_receiver.cache_key)
   end
 
-  def echonest
-    @echonest ||= Echonest.search(sms_song_parser.artist, sms_song_parser.title)
+  def rdio_songs
+    @rdio_songs ||= RdioSongs.new(playlist_owner) if playlist_owner
   end
 
   def authenticate
@@ -36,5 +36,9 @@ class ApplicationController < ActionController::Base
 
   def requester
     @requester ||= User.find_or_create_by_sms(sms_receiver)
+  end
+
+  def playlist_owner
+    @playlist_owner ||= sms_receiver.playlist.user
   end
 end
