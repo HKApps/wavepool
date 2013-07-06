@@ -3,25 +3,26 @@
 %h1= @playlist.name
 #playlist_key= @playlist.rdio_key
 %p Add a few songs to build up your playlist and then press start when you're ready to get started
-#rdio
 
-#songInfo
-  %img#art{ :src=>"", :height=>"100", :style=>"float:left;margin-right:20px;" }
+%button#start start
 
-  %b Track:
-  #track
-  %b Artist:
-  #artist
-  %b Position:
-  %span{ :style => "display:inline-block;width:200px;border:1px solid black;" }
-    %span#position{ :style => "display:inline-block;background-color:#666" }
+#rdioPlayer{ :style => "display:none" }
+  #songInfo
+    %img#art{ :src=>"", :height=>"100", :style=>"float:left;margin-right:20px;" }
 
-#playbackControls
-  %button#start stat
-  -# %button#previous previous
-  %button#play play
-  %button#pause pause
-  -# %button#next next
+    %b Track:
+    #track
+    %b Artist:
+    #artist
+    %b Position:
+    %span{ :style => "display:inline-block;width:200px;border:1px solid black;" }
+      %span#position{ :style => "display:inline-block;background-color:#666" }
+
+  #playbackControls
+    -# %button#previous previous
+    %button#play play
+    %button#pause pause
+    -# %button#next next
 
 
 

@@ -21,7 +21,11 @@ R.ready(function() {
   });
 
   // playlist controls
-  $('#start').click(function() { setPlaylist(); });
+  $('#start').click(function() {
+    setPlaylist();
+    $('#start').css("display", "none");
+    $('#rdioPlayer').css("display", "");
+  });
   $('#play').click(function() { R.player.play(); });
   $('#pause').click(function() { R.player.pause(); });
   $('#previous').click(function() { R.player.previous(); });
