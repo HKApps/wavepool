@@ -1,14 +1,14 @@
 class Echonest
-  def initialize
-    @api_url = Echonest::ApiUrl.new
+  def self.search(artist, title)
+    new(artist, title).api_request
   end
 
-  def search(artist, title)
-    api_request(@api_url.final(artist, title))
+  def initialize(artist, title)
+    @url = ApiUrl.new.final(artist, title)
   end
 
-  def api_request(url)
-    JSON.parse(RestClient.get(url), symbolize_names: true)
+  def api_request
+    ResponseParser.new JSON.parse(RestClient.get(@url), symbolize_names: true)
   end
 
   private
@@ -28,6 +28,35 @@ class Echonest
 
     def base_url
       "http://developer.echonest.com/api/v4/song/search?api_key=#{ENV["ECHONEST_API_KEY"]}"
+    end
+  end
+
+  class ResponseParser
+    attr_reader :response, :status, :songs
+
+    def initialize(raw)
+      return unless raw
+      @response = raw
+      @status   = raw[:response][:status]
+      @songs    = raw[:response][:songs].map { |s| SongParser.new(s) }
+    end
+
+    def to_sms_choices
+      final_text = ''
+      songs.each_with_index do |song, i|
+        final_text << "\n#{i+1}. #{song.title} - #{song.artist_name}"
+      end
+      final_text
+    end
+  end
+
+  class SongParser
+    include ActiveModel::Model
+
+    attr_accessor :title, :artist_name, :id, :tracks, :artist_id, :audio_md5
+
+    def initialize(*args)
+      super
     end
   end
 end
