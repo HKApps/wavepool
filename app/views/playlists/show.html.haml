@@ -1,3 +1,13 @@
 %h1= @playlist.name
 
-%p widgetz
+%h3 Access Code:
+%h3.access_code= @playlist.access_code ? @playlist.access_code : "No access code"
+
+%p Give this access code to all the party goers.
+
+= button_to "New Access Code", generate_access_code_path
+
+:css
+  .access_code {
+    font-weight: bold;
+  }

@@ -8,6 +8,12 @@ Whirlwind::Application.routes.draw do
 
   get '/playlists/:rdio_key' => 'playlists#show'
   get '/playlists' => 'playlists#index'
+  match '/playlists/:rdio_key/add_song' => 'playlists#add_song', as: "add_song_to_playlist", via: [:get, :post]
+  match '/playlists/:rdio_key/generate_access_code' => 'playlists#generate_access_code', as: "generate_access_code", via: [:get, :post]
+
+  post '/connect' => 'connect#connect'
+
+  match '/song_search' => 'song_search#search', as: "song_search", via: [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
