@@ -1,0 +1,26 @@
+.main {
+  width: 80%;
+  padding: 3%;
+  margin-left: auto;
+  margin-right: auto;
+
+  .inner-login-box {
+    padding: 5%;
+    line-height: 30px;
+    .message {
+      font-size: 42px;
+      font-weight: bold;
+      display: inline;
+    }
+
+    .rdio-btn {
+      display: inline;
+      margin-top: 1.7%;
+      height: 40px;
+    }
+  }
+
+  .center {
+    text-align: center;
+  }
+}
