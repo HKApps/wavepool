@@ -8,7 +8,7 @@ Whirlwind::Application.routes.draw do
 
   get '/playlists/:rdio_key' => 'playlists#show'
   get '/playlists' => 'playlists#index'
-
+  match '/helper', to: redirect('/helper.html'), via: [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -49,7 +49,7 @@ Whirlwind::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'
