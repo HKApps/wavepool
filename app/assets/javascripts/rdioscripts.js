@@ -1,7 +1,6 @@
 var duration = 1; // track the duration of the currently playing track
 var playstate = 2; // start with player stopped
 $(document).ready(function(){
-  console.log("ready");
   R.ready(function() {
     // update the track views when tracks change
     R.player.on("change:playingTrack", function(playingTrack) {
