@@ -1,3 +1,4 @@
+= javascript_include_tag "//www.rdio.com/api/api.js?helper=../helper&client_id=1CnHUyjP-7UUzFqoc0qsNQ"
 = javascript_include_tag "rdioscripts.js"
 
 %h1= @playlist.name
@@ -12,9 +13,9 @@
 
 %button#start start
 
-#rdioPlayer
+#rdioPlayer{ :style => "display:none;" }
   #songInfo
-    %img#art{ :src=>"", :height=>"100" }
+    %img#art{ :src => "", :height=>"100" }
 
     %b Track:
     #track
@@ -33,9 +34,6 @@
 :css
   .access_code {
     font-weight: bold;
-  }
-  #rdioPlayer {
-    display: none;
   }
   #art {
     float: left;
