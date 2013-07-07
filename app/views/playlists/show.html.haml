@@ -4,19 +4,25 @@
 #playlist_key= @playlist.rdio_key
 %p Add a few songs to build up your playlist and then press start when you're ready to get started
 
+%h3 Access Code:
+%h3.access_code= @playlist.access_code ? @playlist.access_code : "No access code"
+
+%p Give this access code to all the party goers.
+= button_to "New Access Code", generate_access_code_path
+
 %button#start start
 
-#rdioPlayer{ :style => "display:none" }
+#rdioPlayer
   #songInfo
-    %img#art{ :src=>"", :height=>"100", :style=>"float:left;margin-right:20px;" }
+    %img#art{ :src=>"", :height=>"100" }
 
     %b Track:
     #track
     %b Artist:
     #artist
     %b Position:
-    #positionContainer{ :style => "display:inline-block;width:200px;border:1px solid black;" }
-      #position{ :style => "display:inline-block;background-color:#666" }
+    #positionContainer
+      #position
 
   #playbackControls
     -# %button#previous previous
@@ -24,8 +30,23 @@
     %button#pause pause
     -# %button#next next
 
-
-
-
-
-
+:css
+  .access_code {
+    font-weight: bold;
+  }
+  #rdioPlayer {
+    display: none;
+  }
+  #art {
+    float: left;
+    margin-right: 20px;
+  }
+  #positionContainer {
+    display: inline-block;
+    width: 200px;
+    border: 1px solid black;
+  }
+  #position {
+    display: inline-block;
+    background-color: #666;
+  }
