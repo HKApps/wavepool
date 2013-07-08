@@ -1,5 +1,5 @@
 Whirlwind::Application.routes.draw do
-  root to: 'sessions#new'
+  root to: 'playlists#index'
 
   get '/login', to: "sessions#new"
 
