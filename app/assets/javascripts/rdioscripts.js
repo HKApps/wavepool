@@ -9,7 +9,6 @@ $(document).ready(function(){
         $('#track').text(playingTrack.attributes.name);
         $('#artist').text(playingTrack.attributes.artist);
         if ((R.player.playingSource().attributes.length - R.player.sourcePosition()) == 1){
-          alert("Hurry and add songs. This is the last song in your playlist.");
         }
       }
     });
