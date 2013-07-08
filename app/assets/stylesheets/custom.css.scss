@@ -38,6 +38,15 @@
     height: 150px;
   }
 
+
+  #playbackControls {
+    clear:both;
+
+    img {
+      height: 30px;
+    }
+  }
+
   #positionContainer {
     display: inline-block;
     width: 200px;
