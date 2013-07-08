@@ -17,7 +17,6 @@ $(document).ready(function(){
     });
 
     R.player.on("change:playState", function(state) {
-      console.log(state);
     });
 
     // playlist controls
