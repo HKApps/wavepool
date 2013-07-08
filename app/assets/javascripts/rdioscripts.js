@@ -1,5 +1,5 @@
 var duration = 1; // track the duration of the currently playing track
-var playstate = 2; // start with player stopped
+
 $(document).ready(function(){
   R.ready(function() {
     // update the track views when tracks change
@@ -14,7 +14,7 @@ $(document).ready(function(){
     });
 
     R.player.on("change:position", function(position) {
-      // $('#position').css('width', Math.floor(100*position/duration)+'%');
+      $('#position').css('width', Math.floor(100*position/duration)+'%');
     });
 
     R.player.on("change:playState", function(state) {
@@ -23,8 +23,8 @@ $(document).ready(function(){
     // playlist controls
     $('#start').click(function() {
       setPlaylist();
-      $('#start').css("display", "none");
-      $('#rdioPlayer').css("display", "");
+      $('#startPrompt').hide();
+      $('#rdioPlayer').show();
     });
     $('#play').click(function() { R.player.play(); });
     $('#pause').click(function() { R.player.pause(); });
@@ -34,6 +34,6 @@ $(document).ready(function(){
 });
 
 function setPlaylist(){
-  playlist = $('#playlist_key').html();
+  playlist = $('#playlistKey').html();
   R.player.play({source: playlist});
 }

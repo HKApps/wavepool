@@ -2,21 +2,25 @@
 = javascript_include_tag "rdioscripts.js"
 
 %h1= @playlist.name
-#playlist_key= @playlist.rdio_key
-%p Add a few songs to build up your playlist and then press start when you're ready to get started
+#playlistKey= @playlist.rdio_key
 
-%h3 Access Code:
-%h3.access_code= @playlist.access_code ? @playlist.access_code : "No access code"
+%p
+  Access Code:
+  %b= @playlist.access_code ? @playlist.access_code : "No access code"
 
-%p Give this access code to all the party goers.
-= button_to "New Access Code", generate_access_code_path
+%p
+  Have your friends text the access code to
+  %b 978-278-3217
+  to begin adding songs
+= button_to "New Access Code", generate_access_code_path, class: "btn btn-inverse"
 
-%button#start start
+#startPrompt
+  %p Add a few songs to build up your playlist and then press start
+  #start.btn.btn-success start
 
-#rdioPlayer{ :style => "display:none;" }
+#rdioPlayer
   #songInfo
-    %img#art{ :src => "", :height=>"100" }
-
+    %img#art
     %b Track:
     #track
     %b Artist:
@@ -24,27 +28,10 @@
     %b Position:
     #positionContainer
       #position
+        &nbsp;
 
   #playbackControls
-    -# %button#previous previous
-    %button#play play
-    %button#pause pause
-    -# %button#next next
-
-:css
-  .access_code {
-    font-weight: bold;
-  }
-  #art {
-    float: left;
-    margin-right: 20px;
-  }
-  #positionContainer {
-    display: inline-block;
-    width: 200px;
-    border: 1px solid black;
-  }
-  #position {
-    display: inline-block;
-    background-color: #666;
-  }
+    -# #previous.btn.btn-inverse previous
+    #play.btn.btn-inverse play
+    #pause.btn.btn-inverse pause
+    -# #next.btn.btn-inverse next
