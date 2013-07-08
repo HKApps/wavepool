@@ -1,6 +1,5 @@
-var duration = 1; // track the duration of the currently playing track
-
 $(document).ready(function(){
+  var duration = 1; // track the duration of the currently playing track
   R.ready(function() {
     // update the track views when tracks change
     R.player.on("change:playingTrack", function(playingTrack) {
