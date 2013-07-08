@@ -23,4 +23,39 @@
   .center {
     text-align: center;
   }
+
+  #rdioPlayer {
+    display:none;
+  }
+
+  #playlistKey {
+    display: none;
+  }
+
+  #art {
+    float: left;
+    margin-right: 20px;
+    height: 150px;
+  }
+
+
+  #playbackControls {
+    clear:both;
+    padding-top: 10px;
+
+    img {
+      height: 30px;
+    }
+  }
+
+  #positionContainer {
+    display: inline-block;
+    width: 200px;
+    border: 1px solid black;
+  }
+
+  #position {
+    display: inline-block;
+    background-color: #666;
+  }
 }
