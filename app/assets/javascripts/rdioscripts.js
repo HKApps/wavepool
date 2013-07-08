@@ -4,11 +4,13 @@ $(document).ready(function(){
     // update the track views when tracks change
     R.player.on("change:playingTrack", function(playingTrack) {
       if (playingTrack) {
-        p = playingTrack;
         duration = playingTrack.attributes.duration;
         $('#art').attr('src', playingTrack.attributes.icon);
         $('#track').text(playingTrack.attributes.name);
         $('#artist').text(playingTrack.attributes.artist);
+        if ((R.player.playingSource().attributes.length - R.player.sourcePosition()) == 1){
+          alert("Hurry and add songs. This is the last song in your playlist.");
+        }
       }
     });
 
