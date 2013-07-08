@@ -1,13 +1,37 @@
+= javascript_include_tag "//www.rdio.com/api/api.js?helper=../helper&client_id=1CnHUyjP-7UUzFqoc0qsNQ"
+%script(src="../rdioscripts.js")
+
 %h1= @playlist.name
+#playlistKey= @playlist.rdio_key
 
-%h3 Access Code:
-%h3.access_code= @playlist.access_code ? @playlist.access_code : "No access code"
+%p
+  Access Code:
+  %b= @playlist.access_code ? @playlist.access_code : "No access code"
 
-%p Give this access code to all the party goers.
+%p
+  Have your friends text the access code to
+  %b 978-278-3217
+  to begin adding songs
+= button_to "New Access Code", generate_access_code_path, class: "btn btn-inverse"
 
-= button_to "New Access Code", generate_access_code_path
+#startPrompt
+  %p Add a few songs to build up your playlist and then press start
+  #start.btn.btn-success start
 
-:css
-  .access_code {
-    font-weight: bold;
-  }
+#rdioPlayer
+  #songInfo
+    %img#art
+    %b Track:
+    #track
+    %b Artist:
+    #artist
+    %b Position:
+    #positionContainer
+      #position
+        &nbsp;
+
+  #playbackControls
+    #previous.btn.btn-inverse= image_tag "previous.png"
+    #play.btn.btn-inverse= image_tag "play.png"
+    #pause.btn.btn-inverse= image_tag "pause.png"
+    #next.btn.btn-inverse= image_tag "next.png"

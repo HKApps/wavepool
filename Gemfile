@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.0.0'
+
 gem 'bootstrap-sass'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'figaro'
@@ -9,6 +11,7 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'puma'
 gem 'rails', '4.0.0'
+gem 'rails_12factor', group: :production
 gem 'redis'
 gem 'rest-client'
 gem 'sass-rails', '~> 4.0.0.rc2'

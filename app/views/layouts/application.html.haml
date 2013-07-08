@@ -1,18 +1,19 @@
 !!! 5
 %html
   %head
-    %title Whirlpool
+    %title Wavepool
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
-    = javascript_include_tag "jquery.rdio.js"
+    = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'
     = csrf_meta_tags
     %meta{name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1"}
+    %link{:href => "/wpAppIcon.jpg", :rel => "apple-touch-icon"}
 
   %body
     .navbar.navbar-fixed-top
       .navbar-inner
         .container-fluid
-          = link_to "Whirlpool", root_path, class: "brand"
+          .brand= image_tag "wpLogo.jpg"
+          = link_to "Wavepool", root_path, class: "brand"
     .container-fluid
       .row-fluid
         .span-12
