@@ -18,6 +18,7 @@ $(document).ready(function(){
     });
 
     R.player.on("change:playState", function(state) {
+      console.log(state);
     });
 
     // playlist controls
@@ -26,7 +27,14 @@ $(document).ready(function(){
       $('#startPrompt').hide();
       $('#rdioPlayer').show();
     });
-    $('#play').click(function() { R.player.play(); });
+    $('#play').click(function() {
+      if (R.player.playState() == 2){
+        setPlaylist();
+      }else {
+        R.player.play();
+      }
+
+    });
     $('#pause').click(function() { R.player.pause(); });
     $('#previous').click(function() { R.player.previous(); });
     $('#next').click(function() { R.player.next(); });
