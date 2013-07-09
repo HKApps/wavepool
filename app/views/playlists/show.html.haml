@@ -1,22 +1,33 @@
 = javascript_include_tag "//www.rdio.com/api/api.js?helper=../helper&client_id=1CnHUyjP-7UUzFqoc0qsNQ"
 %script(src="../rdioscripts.js")
 
-%h1= @playlist.name
+%h1.playlist-name= @playlist.name
 #playlistKey= @playlist.rdio_key
 
-%p
-  Access Code:
-  %b= @playlist.access_code ? @playlist.access_code : "No access code"
-
-%p
+%p.instructions
   Have your friends text the access code to
   %b 978-278-3217
-  to begin adding songs
-= button_to "New Access Code", generate_access_code_path, class: "btn btn-inverse"
+  to begin adding songs.
+
+.center
+  .access_code
+    - if @playlist.access_code
+      .pull-left
+        .action
+          = link_to generate_access_code_path do
+            %i.icon-refresh
+      .message
+        = @playlist.access_code
+      .pull-right
+        .action
+          = link_to expire_access_code_path do
+            %i.icon-trash
+    - else
+      .generate-access.message
+        = link_to "Click to generate access code", generate_access_code_path
 
 #startPrompt
-  %p Add a few songs to build up your playlist and then press start
-  #start.btn.btn-success.btn-block start
+  #start.center.btn.btn-success.btn-block Start Playlist
 
 #rdioPlayer
   #playbackControls
