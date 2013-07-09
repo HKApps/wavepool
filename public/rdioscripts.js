@@ -1,14 +1,19 @@
 $(document).ready(function(){
-  var duration = 1; // track the duration of the currently playing track
+  playlist_key = $('#playlistKey').html();
+  user_key = $('#userKey').html();
+  song_index = 0;
+  duration = 1; // track the duration of the currently playing track
+  songPlayed = false;
   R.ready(function() {
     // update the track views when tracks change
     R.player.on("change:playingTrack", function(playingTrack) {
       if (playingTrack) {
         duration = playingTrack.attributes.duration;
+        song_index = R.player.sourcePosition();
         $('#art').attr('src', playingTrack.attributes.icon);
         $('#track').text(playingTrack.attributes.name);
         $('#artist').text(playingTrack.attributes.artist);
-        if ((R.player.playingSource().attributes.length - R.player.sourcePosition()) == 1){
+        if ((R.player.playingSource().attributes.length - song_index) == 1){
         }
       }
     });
@@ -18,6 +23,9 @@ $(document).ready(function(){
     });
 
     R.player.on("change:playState", function(state) {
+      if (state == 2 && songPlayed){
+        tryAndAddNextSong(user_key, playlist_key, song_index);
+      }
     });
 
     // playlist controls
@@ -25,6 +33,7 @@ $(document).ready(function(){
       setPlaylist();
       $('#startPrompt').hide();
       $('#rdioPlayer').show();
+      songPlayed = true;
     });
     $('#play').click(function() {
       if (R.player.playState() == 2){
@@ -32,7 +41,6 @@ $(document).ready(function(){
       }else {
         R.player.play();
       }
-
     });
     $('#pause').click(function() { R.player.pause(); });
     $('#previous').click(function() { R.player.previous(); });
@@ -41,6 +49,27 @@ $(document).ready(function(){
 });
 
 function setPlaylist(){
-  playlist = $('#playlistKey').html();
-  R.player.play({source: playlist});
+  R.player.play({source: playlist_key});
+}
+
+function tryAndAddNextSong(user_key, playlist_key, song_index){
+  R.request({
+    method: "getUserPlaylists",
+    content: {
+      user: user_key
+    },
+    success: function(response){
+      playlists = response.result;
+      for (i in playlists){
+        if (playlists[i].key == playlist_key){
+          if (playlists[i].length > song_index){
+            R.player.play({source: playlist_key, index: song_index + 1});
+          }
+        }
+      }
+    },
+    error: function(response){
+      console.log(response.message);
+    }
+  });
 }
