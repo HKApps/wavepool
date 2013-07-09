@@ -4,7 +4,6 @@
     %title Wavepool
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js'
-    = javascript_include_tag 'bootstrap-dropdown'
     = csrf_meta_tags
     %meta{name: "viewport", content: "width=device-width, initial-scale=1, maximum-scale=1"}
     %link{:href => "/wpAppIcon.jpg", :rel => "apple-touch-icon"}
@@ -14,7 +13,7 @@
       .navbar-inner
         .container-fluid
           .brand= image_tag "wpLogo.jpg"
-          = link_to "Wavepool", root_path, class: "brand"
+          = link_to "Wavepool", root_path, class: "brand brand-title"
           .pull-right
             %ul.nav
               - if current_user
