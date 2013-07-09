@@ -3,6 +3,7 @@ $(document).ready(function(){
   user_key = $('#userKey').html();
   song_index = 0;
   duration = 1; // track the duration of the currently playing track
+  songPlayed = false;
   R.ready(function() {
     // update the track views when tracks change
     R.player.on("change:playingTrack", function(playingTrack) {
@@ -22,7 +23,7 @@ $(document).ready(function(){
     });
 
     R.player.on("change:playState", function(state) {
-      if (state == 2 & song_index > 0){
+      if (state == 2 && songPlayed){
         tryAndAddNextSong(user_key, playlist_key, song_index);
       }
     });
@@ -32,6 +33,7 @@ $(document).ready(function(){
       setPlaylist();
       $('#startPrompt').hide();
       $('#rdioPlayer').show();
+      songPlayed = true;
     });
     $('#play').click(function() {
       if (R.player.playState() == 2){
