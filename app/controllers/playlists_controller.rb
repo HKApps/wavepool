@@ -43,6 +43,16 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def expire_access_code
+    playlist = Playlist.find_by rdio_key: params[:rdio_key]
+    playlist.access_code = nil
+    if playlist.save
+      redirect_to :back, notice: "Successfully expired access code"
+    else
+      redirect_to :back, notice: "FAIL"
+    end
+  end
+
   private
 
   def generate_code
