@@ -16,7 +16,7 @@
 
 #startPrompt
   %p Add a few songs to build up your playlist and then press start
-  #start.btn.btn-success start
+  #start.btn.btn-success.btn-block start
 
 #rdioPlayer
   #playbackControls
@@ -29,9 +29,10 @@
     %img#art
     %b Track:
     #track
+    %br
     %b Artist:
     #artist
-    %b Position:
-    #positionContainer
-      #position
-        &nbsp;
+
+  #positionContainer
+    #position
+      &nbsp;

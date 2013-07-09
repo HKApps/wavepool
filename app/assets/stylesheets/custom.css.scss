@@ -1,6 +1,7 @@
 .main {
   width: 80%;
   padding: 3%;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 
@@ -24,6 +25,12 @@
     text-align: center;
   }
 
+  #startPrompt {
+    #start {
+      max-width: 410px;
+    }
+  }
+
   #rdioPlayer {
     display:none;
   }
@@ -32,23 +39,23 @@
     display: none;
   }
 
-  #art {
-    float: left;
-    margin-right: 20px;
-    height: 150px;
-  }
-
-
   #playbackControls {
-    padding-bottom: 10px;
+    margin-bottom: 10px;
 
     img {
       height: 25px;
     }
   }
 
+  #art {
+    float: left;
+    margin-right: 20px;
+    height: 150px;
+    margin-bottom: 10px;
+  }
+
   #positionContainer {
-    display: inline-block;
+    clear: both;
     width: 200px;
     border: 1px solid black;
   }
@@ -57,4 +64,5 @@
     display: inline-block;
     background-color: #666;
   }
+
 }
