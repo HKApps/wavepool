@@ -18,10 +18,9 @@ class SessionsController < ApplicationController
     session.delete(:request_token)
     session.delete(:request_token_secret)
 
-    user = User.where(rdio_key: rdio.call('currentUser')['result']['key']).first_or_initialize do |u|
-      u.access_token        = rdio.token[0]
-      u.access_token_secret = rdio.token[1]
-    end
+    user = User.where(rdio_key: rdio.call('currentUser')['result']['key']).first_or_initialize
+    user.access_token        = rdio.token[0]
+    user.access_token_secret = rdio.token[1]
 
     if user.save
       session[:user_id] = user.id
