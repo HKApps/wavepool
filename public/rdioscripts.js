@@ -1,5 +1,6 @@
 $(document).ready(function(){
   playlist_key = $('#playlistKey').html();
+  user_key = $('#userKey').html();
   song_index = 0;
   duration = 1; // track the duration of the currently playing track
   R.ready(function() {
@@ -22,7 +23,7 @@ $(document).ready(function(){
 
     R.player.on("change:playState", function(state) {
       if (state == 2 & song_index > 0){
-        tryAndAddNextSong(playlist_key, song_index);
+        tryAndAddNextSong(user_key, playlist_key, song_index);
       }
     });
 
@@ -49,11 +50,11 @@ function setPlaylist(){
   R.player.play({source: playlist_key});
 }
 
-function tryAndAddNextSong(playlist_key, song_index){
+function tryAndAddNextSong(user_key, playlist_key, song_index){
   R.request({
     method: "getUserPlaylists",
     content: {
-      user: "s8453927"
+      user: user_key
     },
     success: function(response){
       playlists = response.result;
