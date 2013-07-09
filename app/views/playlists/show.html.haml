@@ -16,22 +16,22 @@
 
 #startPrompt
   %p Add a few songs to build up your playlist and then press start
-  #start.btn.btn-success start
+  #start.btn.btn-success.btn-block start
 
 #rdioPlayer
+  #playbackControls
+    #previous.btn.btn-inverse= image_tag "previous.png"
+    #play.btn.btn-inverse= image_tag "play.png"
+    #pause.btn.btn-inverse= image_tag "pause.png"
+    #next.btn.btn-inverse= image_tag "next.png"
+
   #songInfo
     %img#art
     %b Track:
     #track
     %b Artist:
     #artist
-    %b Position:
-    #positionContainer
-      #position
-        &nbsp;
 
-  #playbackControls
-    #previous.btn.btn-inverse= image_tag "previous.png"
-    #play.btn.btn-inverse= image_tag "play.png"
-    #pause.btn.btn-inverse= image_tag "pause.png"
-    #next.btn.btn-inverse= image_tag "next.png"
+  #positionContainer
+    #position
+      &nbsp;
