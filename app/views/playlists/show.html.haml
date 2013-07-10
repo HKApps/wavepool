@@ -31,14 +31,15 @@
   #start.center.btn.btn-success.btn-block Start Playlist
 
 #rdioPlayer
-  #playbackControls
-    #previous.btn.btn-inverse= image_tag "previous.png"
-    #play.btn.btn-inverse= image_tag "play.png"
-    #pause.btn.btn-inverse= image_tag "pause.png"
-    #next.btn.btn-inverse= image_tag "next.png"
+  #playbackControls.center
+    #previous.btn.btn-primary= image_tag "previous.png"
+    #play.btn.btn-primary= image_tag "play.png"
+    #pause.btn.btn-primary= image_tag "pause.png"
+    #next.btn.btn-primary= image_tag "next.png"
 
-  #songInfo
+  #songInfo.center
     %img#art
+    .clear
     %b Track:
     #track
     %b Artist:

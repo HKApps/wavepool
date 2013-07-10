@@ -85,7 +85,18 @@
 
   #searchField{
     input{
+      text-align: center;
+      max-width: 410px;
       width: 100%;
+    }
+  }
+
+  .clear {
+    clear: both;
+  }
+
+  #startPrompt {
+    #start {
       max-width: 410px;
       text-align: center;
     }
@@ -102,23 +113,28 @@
   #playbackControls {
     margin-bottom: 10px;
 
+    .btn-primary, .btn-primary:hover {
+      background-color: #3b59ed;
+    }
+
     img {
       height: 25px;
     }
   }
 
   #art {
-    float: left;
-    margin-right: 20px;
     height: 150px;
     margin-bottom: 10px;
   }
 
   #positionContainer {
-    clear: both;
     width: 200px;
     border: 1px solid black;
-    margin-bottom: 40px;
+    margin-top: 10px;
+    margin-bottom: 60px;
+    margin-left: auto;
+    margin-right: auto;
+
   }
 
   #position {
