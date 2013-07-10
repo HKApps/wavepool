@@ -30,14 +30,15 @@ $(document).ready(function(){
 
     // playlist controls
     $('#start').click(function() {
-      setPlaylist();
+      songPlayed = true;
+      setPlaylist(playlist_key, song_index);
       $('#startPrompt').hide();
       $('#rdioPlayer').show();
-      songPlayed = true;
     });
     $('#play').click(function() {
       if (R.player.playState() == 2){
-        setPlaylist();
+        song_index = 0;
+        setPlaylist(playlist_key, song_index);
       }else {
         R.player.play();
       }
@@ -48,8 +49,8 @@ $(document).ready(function(){
   });
 });
 
-function setPlaylist(){
-  R.player.play({source: playlist_key});
+function setPlaylist(source, index){
+  R.player.play({source: source, index: index});
 }
 
 function tryAndAddNextSong(user_key, playlist_key, song_index){
@@ -63,7 +64,7 @@ function tryAndAddNextSong(user_key, playlist_key, song_index){
       for (i in playlists){
         if (playlists[i].key == playlist_key){
           if (playlists[i].length > song_index){
-            R.player.play({source: playlist_key, index: song_index + 1});
+            setPlaylist(playlist_key, song_index + 1);
           }
         }
       }
