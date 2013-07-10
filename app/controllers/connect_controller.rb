@@ -4,7 +4,7 @@ class ConnectController < ApplicationController
   def connect
     if sms_receiver.legit_access_code_present? && requester.present?
       twiml_response = Twilio::TwiML::Response.new do |r|
-        r.Sms "Thanks! What song would like to request?\n\nFormat your request like '[title] - [artist]'.\n\nFor example: Get Lucky - Daft Punk."
+        r.Sms "Thanks! What song would like to request?"
       end
       render xml: twiml_response.text
     elsif sms_receiver.song_decision?
