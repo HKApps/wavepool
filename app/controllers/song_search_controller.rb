@@ -14,6 +14,6 @@ class SongSearchController < ApplicationController
   private
 
   def no_result_response
-    "Sorry, we can’t find that one! Check your spelling and try again!"
+    "Sorry! We couldn't process your request! :("
   end
 end
