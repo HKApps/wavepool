@@ -11,15 +11,8 @@ class ConnectController < ApplicationController
       params.merge!(rdio_key: sms_receiver.playlist.rdio_key)
       redirect_to add_song_to_playlist_path(params)
     else
-     if sms_receiver.song_request?
       params.merge!(rdio_key: sms_receiver.playlist.rdio_key)
-     else
       redirect_to song_search_path(params)
-      twiml_response = Twilio::TwiML::Response.new do |r|
-        r.Sms "Sorry! We couldn't process your request! :("
-      end
-      render xml: twiml_response.text
-     end
     end
   end
 end
