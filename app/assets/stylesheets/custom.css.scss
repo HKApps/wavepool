@@ -78,6 +78,19 @@
     margin-right: auto;
   }
 
+  .btn-block {
+    max-width: 410px;
+    margin-bottom: 40px;
+  }
+
+  #searchField{
+    input{
+      text-align: center;
+      max-width: 410px;
+      width: 100%;
+    }
+  }
+
   .clear {
     clear: both;
   }
@@ -85,7 +98,7 @@
   #startPrompt {
     #start {
       max-width: 410px;
-      margin-bottom: 40px;
+      text-align: center;
     }
   }
 
