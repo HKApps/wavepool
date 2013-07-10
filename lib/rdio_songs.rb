@@ -23,9 +23,9 @@ class RdioSongs
     end
 
     def to_sms_choices
-      final_text = "Which song?\n"
+      final_text = "Which song number?\n"
       songs.each_with_index do |song, i|
-        final_text << "#{i+1}. #{song.name.truncate(28)} - #{song.artist.truncate(14)}\n"
+        final_text << "#{i+1}. #{song.name.truncate(25)} - #{song.artist.truncate(10)}\n"
       end
       final_text
     end
