@@ -1,8 +1,9 @@
 $(document).ready(function(){
   playlist_key = $('#playlistKey').html();
   user_key = $('#userKey').html();
+  playState = 2; // start with player stopped
   song_index = 0;
-  duration = 1; // track the duration of the currently playing track
+  duration = 0; // track the duration of the currently playing track
   songPlayed = false;
   R.ready(function() {
     // update the track views when tracks change
@@ -23,22 +24,22 @@ $(document).ready(function(){
     });
 
     R.player.on("change:playState", function(state) {
+      playState = state;
       if (state == 2 && songPlayed){
-        tryAndAddNextSong(user_key, playlist_key, song_index);
+        tryAndAddNextSong(user_key, playlist_key, song_index + 1);
       }
     });
 
     // playlist controls
     $('#start').click(function() {
-      songPlayed = true;
-      setPlaylist(playlist_key, song_index);
+      tryAndAddNextSong(user_key, playlist_key, song_index);
       $('#startPrompt').hide();
       $('#rdioPlayer').show();
     });
     $('#play').click(function() {
-      if (R.player.playState() == 2){
+      if (playState == 2){
         song_index = 0;
-        setPlaylist(playlist_key, song_index);
+        tryAndAddNextSong(user_key, playlist_key, song_index);
       }else {
         R.player.play();
       }
@@ -64,7 +65,8 @@ function tryAndAddNextSong(user_key, playlist_key, song_index){
       for (i in playlists){
         if (playlists[i].key == playlist_key){
           if (playlists[i].length > song_index){
-            setPlaylist(playlist_key, song_index + 1);
+            songPlayed = true;
+            setPlaylist(playlist_key, song_index);
           }
         }
       }
