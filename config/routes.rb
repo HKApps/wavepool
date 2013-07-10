@@ -1,4 +1,4 @@
-Whirlwind::Application.routes.draw do
+Wavepool::Application.routes.draw do
   root to: 'playlists#index'
 
   get '/login', to: "sessions#new"

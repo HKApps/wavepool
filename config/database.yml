@@ -1,14 +1,14 @@
 development:
   adapter: postgresql
-  database: whirlwind_development
+  database: wavepool_development
   pool: 25
 
 test:
   adapter: postgresql
-  database: whirlwind_test
+  database: wavepool_test
   pool: 5
 
 production:
   adapter: postgresql
-  database: whirlwind_production
+  database: wavepool_production
   pool: 25

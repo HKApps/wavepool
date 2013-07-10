@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Whirlwind::Application.load_tasks
+Wavepool::Application.load_tasks
