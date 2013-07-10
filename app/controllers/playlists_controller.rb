@@ -33,6 +33,16 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def create_playlist
+    playlist_name =  params[:playlistName]
+    rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
+                    [current_user.access_token, current_user.access_token_secret])
+    playlist = rdio.call("createPlaylist", name: playlist_name, description: "", tracks: "")["result"]
+    Playlist.create(name: playlist["name"], rdio_key: playlist["key"], user_id: current_user.id)
+
+    redirect_to "/playlists/#{playlist["key"]}"
+  end
+
   def generate_access_code
     playlist = Playlist.find_by rdio_key: params[:rdio_key]
     playlist.access_code = generate_code

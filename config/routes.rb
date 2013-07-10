@@ -10,6 +10,7 @@ Whirlwind::Application.routes.draw do
 
   get '/playlists/:rdio_key' => 'playlists#show'
   get '/playlists' => 'playlists#index'
+  match '/playlists/create_playlist' => 'playlists#create_playlist', as: "create_playlist", via: [:get, :post]
   match '/playlists/:rdio_key/add_song' => 'playlists#add_song', as: "add_song_to_playlist", via: [:get, :post]
   match '/playlists/:rdio_key/generate_access_code' => 'playlists#generate_access_code', as: "generate_access_code", via: [:get, :post]
   match '/playlists/:rdio_key/expire_access_code' => 'playlists#expire_access_code', as: "expire_access_code", via: [:get, :post]

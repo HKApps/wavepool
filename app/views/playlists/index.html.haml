@@ -3,3 +3,9 @@
 %ul.nav.nav-tabs.nav-stacked.playlist-list
   - @playlists.each do |playlist|
     %li= link_to playlist["name"], "/playlists/#{playlist["key"]}"
+
+%h2.center Create Playlist
+
+  = form_tag create_playlist_path, :method => :post do
+    = text_field_tag "playlistName", ""
+    = submit_tag "Submit"
