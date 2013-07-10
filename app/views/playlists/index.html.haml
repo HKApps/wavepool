@@ -6,6 +6,6 @@
 
 %h2.center Create Playlist
 #createPlaylistForm.center
-  = form_tag create_playlist_path, :method => :post do
+  = form_tag create_playlist_path(rdio_key: "key"), :method => :post do
     #searchField= text_field_tag "playlistName", nil, placeholder: "Playlist name..."
     %input.btn.btn-success.btn-block.center{ :name => "commit", :type => "submit", :value => "create"}
