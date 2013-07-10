@@ -33,7 +33,7 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  def create_playlist
+  def create
     playlist_name =  params[:playlistName]
     rdio = Rdio.new([ENV["RDIO_CONSUMER_KEY"], ENV["RDIO_CONSUMER_SECRET"]],
                     [current_user.access_token, current_user.access_token_secret])
