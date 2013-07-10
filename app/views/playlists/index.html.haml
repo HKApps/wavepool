@@ -1,11 +1,11 @@
-%h2.center My playlists
+%h2.center My Playlists
 
 %ul.nav.nav-tabs.nav-stacked.playlist-list
   - @playlists.each do |playlist|
     %li= link_to playlist["name"], "/playlists/#{playlist["key"]}"
 
 %h2.center Create Playlist
-
+#createPlaylistForm.center
   = form_tag create_playlist_path, :method => :post do
-    = text_field_tag "playlistName", ""
-    = submit_tag "Submit"
+    #searchField= text_field_tag "playlistName", nil, placeholder: "Playlist name..."
+    %input.btn.btn-success.btn-block.center{ :name => "commit", :type => "submit", :value => "create"}

@@ -78,10 +78,16 @@
     margin-right: auto;
   }
 
-  #startPrompt {
-    #start {
+  .btn-block {
+    max-width: 410px;
+    margin-bottom: 40px;
+  }
+
+  #searchField{
+    input{
+      width: 100%;
       max-width: 410px;
-      margin-bottom: 40px;
+      text-align: center;
     }
   }
 
