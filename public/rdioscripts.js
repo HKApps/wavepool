@@ -9,6 +9,7 @@ $(document).ready(function(){
     // update the track views when tracks change
     R.player.on("change:playingTrack", function(playingTrack) {
       if (playingTrack) {
+        songPlayed = true;
         duration = playingTrack.attributes.duration;
         song_index = R.player.sourcePosition();
         $('#art').attr('src', playingTrack.attributes.icon);
@@ -39,6 +40,7 @@ $(document).ready(function(){
     $('#play').click(function() {
       if (playState == 2){
         song_index = 0;
+        songPlayed = false;
         tryAndAddNextSong(user_key, playlist_key, song_index);
       }else {
         R.player.play();
@@ -65,7 +67,6 @@ function tryAndAddNextSong(user_key, playlist_key, song_index){
       for (i in playlists){
         if (playlists[i].key == playlist_key){
           if (playlists[i].length > song_index){
-            songPlayed = true;
             setPlaylist(playlist_key, song_index);
           }
         }
